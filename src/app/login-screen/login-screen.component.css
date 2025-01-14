@@ -1,0 +1,160 @@
+.loginRow{
+    height: 100vh;
+    padding: 0px;
+    width: 100vw;
+    margin: 0px;
+    background: linear-gradient(180deg, #33A3AA 0%, #107076 100%);
+}
+.leftsidelogin{
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    width:55%;
+    position: relative;
+    
+}
+.rightSideLogin{
+    padding: 0px;
+    margin: 0px;
+    z-index: 10;
+    background-color: white;
+    height: 100%;
+    border-radius:25px;
+    width: 40%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.grayback{
+    background-color: black;
+    opacity: 80%;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 1000;
+}
+.loginRow{
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    background: linear-gradient(180deg, #292d2d 0%, #a0aaaa 100%);
+
+}
+.backImage{
+    height: 100%;
+    width: 100%;
+    opacity: 0.1;
+    z-index: -10;
+}
+.text{
+    font-family: Poppins;
+    width:min-content;
+    word-wrap: normal;
+    color: white;
+    position: absolute;
+    top:50%;
+    left:40%;
+    transform: translate(-50%, -50%);
+}
+.title{
+    width: 361px;
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 58px;
+    text-align: left;
+    opacity: 1;
+}
+.bodyText{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+}
+.row{
+    background:#363737;
+}
+.monitoreoIntegral{
+    display: flex;
+}
+.monitoreoTitle{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: left;
+}
+.monitoreoText{
+    width: max-content;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 17px;
+    text-align: left;
+}
+.formLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: min-content;
+
+}
+.formTitle{
+    text-align: start;
+    width: 100% ;
+}
+.loginInput{
+    width: 393px;
+    height: 58px;
+    border-radius: 12px;
+    border: 1px solid #DCDBDD;
+    margin-bottom: 20px;
+}
+.modal{
+    height: 100vh;
+    width: 100vw;
+    display:inline;
+    .modal-dialog{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+.requestForm{
+    width: 420px;
+    height: max-content;
+    border-radius: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+    background-color: white;
+}
+.modal-dialog{
+    pointer-events: all;
+}
+
+.inputDiv{
+    position: relative;
+    margin-top: 10px;
+    p {
+        position: absolute;
+        margin-bottom: 0px;
+        top: -11px;
+        left: 15px;
+        background-color: white;
+        padding: 0px 10px 0px 10px;
+    }
+    img {
+        position:absolute;
+        top:25px;
+        right: 15px;
+    }
+}
+.formFooter{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-direction: column;
+}

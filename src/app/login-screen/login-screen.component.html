@@ -1,0 +1,183 @@
+<div class="row loginRow">
+  <div class="col leftsidelogin">
+    <img
+      class="backImage"
+      src="/assets/images/a0d1013d36e21f2381ef822d0e1d387b.png"
+      alt=""
+    />
+    <div class="text">
+      <p class="title">Iniciar sesión</p>
+      <p class="bodyText">
+        Nos alegra tenerte de vuelta y estamos listos para atender tus
+        necesidades. Inicia sesión y continúa aprovechando al máximo nuestra
+        plataforma.
+      </p>
+      <div class="monitoreoIntegral">
+        <img src="\assets\images\monitor_icon.svg" alt="" />
+        <div>
+          <p class="monitoreoTitle">Monitoreo integral</p>
+          <p class="monitoreoText">
+            Administra, monitorea mutiples plantas de forma centralizada
+          </p>
+        </div>
+      </div>
+      <div class="monitoreoIntegral">
+        <img src="/assets/images/star_icon.svg" alt="" />
+        <div>
+          <p class="monitoreoTitle">Notificaciones en tiempo real</p>
+          <p class="monitoreoText">
+            Recibi notificaciones en tiempo real sobre las mediciones
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col rightSideLogin">
+    <div class="formLogin">
+      <div class="formTitle">
+        <h3>Portal de monitoreo</h3>
+        <h6>Iniciar sesión</h6>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div>
+          <div class="inputDiv">
+            <p>Username</p>
+            <input
+              class="loginInput form-control"
+              type="username"
+              formControlName="username"
+            />
+          </div>
+          <div class="inputDiv">
+            <p>Password</p>
+            <input
+              class="loginInput form-control"
+              type="password"
+              formControlName="password"
+            />
+            <img src="/assets/images/eye.svg" alt="" />
+          </div>
+        </div>
+        <div class="formFooter">
+          <input type="submit" value="Log In" method="post" class="btn" />
+          <input
+            type="buttom"
+            (click)="openRegisterForm()"
+            value="Register"
+            class="btn"
+          />
+          <input
+            type="buttom"
+            value="Olvidaste tu contraseña?"
+            (click)="openRecoveryForm()"
+            value="Recovery"
+            class="btn"
+          />
+        </div>
+      </form>
+
+      <span>Test site made by Rodrigo Luna.</span>
+    </div>
+  </div>
+  <div class="grayback" *ngIf="displayGray"></div>
+</div>
+<div class="modal" tabindex="-1" role="form" *ngIf="displayRegister">
+  <div class="modal-dialog" role="document">
+    <div class="requestForm">
+      <div class="modal-header">
+        <h4 class="modal-title">Registrar nuevo usuario.</h4>
+      </div>
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="inputDiv">
+          <p>Email</p>
+          <input
+            class="registerInput form-control"
+            type="email"
+            formControlName="email"
+          />
+        </div>
+        <div class="inputDiv">
+          <p>Username</p>
+          <input
+            class="registerInput form-control"
+            type="username"
+            formControlName="username"
+          />
+        </div>
+        <div class="inputDiv">
+          <p>Password</p>
+          <input
+            class="registerInput form-control"
+            type="password"
+            formControlName="password"
+          />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" (click)="closeRegisterForm()">
+            Cancel
+          </button>
+          <input type="submit" value="Register" method="post" class="btn" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" role="form" *ngIf="displayRecovery">
+  <div class="modal-dialog" role="document">
+    <div class="requestForm">
+      <div class="modal-header">
+        <h4 class="modal-title">Recuperar acceso.</h4>
+      </div>
+      <form [formGroup]="recoveryForm" (ngSubmit)="recovery()">
+        <div class="inputDiv">
+          <p>Email</p>
+          <input
+            class="recoveryInput form-control"
+            type="email"
+            formControlName="email"
+          />
+        </div>
+        <div class="inputDiv">
+          <p>Username</p>
+          <input
+            class="recoveryInput form-control"
+            type="username"
+            formControlName="username"
+          />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" (click)="closeRecoveryForm()">
+            Cancel
+          </button>
+          <input type="submit" value="recovery" method="post" class="btn" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div
+  class="modal"
+  tabindex="-1"
+  *ngIf="displaySuccess"
+  role="alert"
+>
+  <div class="modal-dialog alert alert-success">
+    <div class="requestForm">
+      <h1>{{ message }}</h1>
+      <div class="modal-footer">
+        <button type="button" class="btn" (click)="closeAlert()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal"  tabindex="-1" *ngIf="displayFailure" role="alert">
+  <div class="modal-dialog alert alert-danger">
+    <div class="requestForm">
+      <h1>{{ message }}</h1>
+      <div class="modal-footer">
+        <button type="button" class="btn" (click)="closeAlert()">Close</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
