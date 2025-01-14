@@ -90,19 +90,16 @@ export class DashboardComponent {
 
   openPlantCreator() {
     this.creatingPlant = true;
-    console.log(this.creatingPlant)
   }
   closePlantCreator() {
     this.creatingPlant = false;
   }
 
   openSensorCreator(plant: PlantModel) {
-    console.log(plant.id);
     this.creatingSensor = true;
     this.plantName = plant.name;
     this.country = plant.country;
     this.plantId = plant.id;
-    console.log(this.plantId)
   }
   closeSensorCreator() {
     this.creatingSensor = false;
@@ -122,7 +119,7 @@ export class DashboardComponent {
       content.nodeValue = data.status;
       document.getElementById("response_area")!.appendChild(output)
       if (data.status == "OK") {
-        this.route.navigate(['dashboard']);
+        window.location.reload();
       }
 
     });
@@ -141,7 +138,7 @@ export class DashboardComponent {
       content.nodeValue = data.status;
       document.getElementById("response_area")!.appendChild(output)
       if (data.status == "OK") {
-        this.route.navigate(['dashboard']);
+        window.location.reload();
       }
 
     });
@@ -150,9 +147,8 @@ export class DashboardComponent {
   async getReadings() {
     await this.commService.commsManager(this.requestReadings).subscribe((data) => {
       if (data.status == "OK") {
-        this.route.navigate(['dashboard']);
+        window.location.reload();
       } else {
-        console.log(data.status)
         this.route.navigate(['login']);
       }
     })
