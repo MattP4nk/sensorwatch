@@ -122,7 +122,7 @@ export class DashboardComponent {
       content.nodeValue = data.status;
       document.getElementById("response_area")!.appendChild(output)
       if (data.status == "OK") {
-        location.reload();
+        this.route.navigate(['dashboard']);
       }
 
     });
@@ -141,7 +141,7 @@ export class DashboardComponent {
       content.nodeValue = data.status;
       document.getElementById("response_area")!.appendChild(output)
       if (data.status == "OK") {
-        location.reload();
+        this.route.navigate(['dashboard']);
       }
 
     });
@@ -150,7 +150,7 @@ export class DashboardComponent {
   async getReadings() {
     await this.commService.commsManager(this.requestReadings).subscribe((data) => {
       if (data.status == "OK") {
-        location.reload();
+        this.route.navigate(['dashboard']);
       } else {
         console.log(data.status)
         this.route.navigate(['login']);
