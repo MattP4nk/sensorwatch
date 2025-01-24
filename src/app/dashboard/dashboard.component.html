@@ -1,256 +1,266 @@
-<div class="mainContent">
-  <div class="top">
-    <div class="title"><h1>Monitoreo Global</h1></div>
-    <div class="menu">
-      <a href=""><img src="/assets/images/top/idioma.svg" alt="" /></a>
-      <a href=""><img src="/assets/images/top/ajustes.svg" alt="" /></a>
-      <a href=""><img src="/assets/images/top/notificaciones.svg" alt="" /></a>
-      <div class="usuario">{{ username }}</div>
-    </div>
-  </div>
-  <div class="items">
-    <div class="sensorCard">
-      <div class="lecturas">
-        <h6>Lecturas OK</h6>
-        <p>{{ records.totalSafes }}</p>
-      </div>
-      <img src="/assets/images/items/ok.svg" alt="" />
-    </div>
-    <div class="sensorCard">
-      <div class="lecturas">
-        <h6>Alertas medias</h6>
-        <p>{{ records.totalWarnings }}</p>
-      </div>
-      <img src="/assets/images/items/warning.svg" alt="" />
-    </div>
-    <div class="sensorCard">
-      <div class="lecturas">
-        <h6>Alertas rojas</h6>
-        <p>{{ records.totalRedAlerts }}</p>
-      </div>
-      <img src="/assets/images/items/danger.svg" alt="" />
-    </div>
-    <div class="sensorCard">
-      <div class="lecturas">
-        <h6>Sensores deshabilitados</h6>
-        <p>{{ records.totalNotActive }}</p>
-      </div>
-      <img src="/assets/images/items/deshabilitado.svg" alt="" />
-    </div>
-  </div>
-  <div class="tabla" style="overflow: scroll">
-    <div class="tituloTabla">
-      <h6>Plantas</h6>
-      <button *ngIf="isAdmin" class="btn" (click)="openPlantCreator()">
-        + Crear nueva planta
-      </button>
-      <button class="btn" (click)="getReadings()">
-        + Obtener nuevas mediciones
-      </button>
-    </div>
-    <div class="contenidoTabla">
-      <div class="columNames">
-        <div><h6>Pais</h6></div>
-        <div><h6>Nombre de la planta</h6></div>
-        <div><h6>Lecturas</h6></div>
-        <div><h6>Alertas medias</h6></div>
-        <div><h6>Alertas rojas</h6></div>
-        <div><h6>Acciones</h6></div>
-      </div>
-      <ul *ngFor="let plant of plants">
-        <div class="columNames row">
-          <div class="col">
-            <p>{{ plant.country }}</p>
-          </div>
-          <div class="col">
-            <p>{{ plant.name }}</p>
-          </div>
-          <div class="col number">
-            <p>{{ plant.totalSafes }}</p>
-          </div>
-          <div class="col number">
-            <p>{{ plant.totalWarnings }}</p>
-          </div>
-          <div class="col number">
-            <p>{{ plant.totalRedAlerts }}</p>
-          </div>
-          <div class="col number">
-            <button *ngIf="isAdmin" class="btn" (click)="openSensorCreator(plant)">
-              <img
-                src="/assets/images/more.svg"
-                alt=""
-                style="vertical-align: top"
-              />
-            </button>
-          </div>
-        </div>
-        <span class="divisor"></span>
-      </ul>
-    </div>
-  </div>
-  <div class="indicadores">
-    <div class="row first">
-      <div class="sensorCard">
-        <div style="display: flex; flex-direction: column">
-          <p>Temperatura</p>
-          <div class="sensorAlerts">
-            <div class="sensorItem">
-              <img src="/assets/images/items/ok.svg" alt="" />
-              <p>{{ records.temperatureSafes }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/warning.svg" alt="" />
-              <p>{{ records.temperatureWarnings }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/danger.svg" alt="" />
-              <p>{{ records.temperatureRedAlerts }}</p>
-            </div>
-          </div>
-        </div>
-        <img src="/assets/images/sensors/temperatura.svg" alt="" />
-      </div>
-      <div class="sensorCard">
-        <div style="display: flex; flex-direction: column">
-          <p>Presion</p>
-          <div class="sensorAlerts">
-            <div class="sensorItem">
-              <img src="/assets/images/items/ok.svg" alt="" />
-              <p>{{ records.presionSafes }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/warning.svg" alt="" />
-              <p>{{ records.presionWarnings }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/danger.svg" alt="" />
-              <p>{{ records.presionRedAlerts }}</p>
-            </div>
-          </div>
-        </div>
-        <img src="/assets/images/sensors/presion.svg" alt="" />
-      </div>
-      <div class="sensorCard">
-        <div style="display: flex; flex-direction: column">
-          <p>Vientos</p>
-          <div class="sensorAlerts">
-            <div class="sensorItem">
-              <img src="/assets/images/items/ok.svg" alt="" />
-              <p>{{ records.vientoSafes }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/warning.svg" alt="" />
-              <p>{{ records.vientoWarnings }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/danger.svg" alt="" />
-              <p>{{ records.vientoRedAlerts }}</p>
-            </div>
-          </div>
-        </div>
-        <img src="/assets/images/sensors/viento.svg" alt="" />
-      </div>
-      <div class="sensorCard">
-        <div style="display: flex; flex-direction: column">
-          <p>Niveles</p>
-          <div class="sensorAlerts">
-            <div class="sensorItem">
-              <img src="/assets/images/items/ok.svg" alt="" />
-              <p>{{ records.nivelesSafes }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/warning.svg" alt="" />
-              <p>{{ records.nivelesWarnings }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/danger.svg" alt="" />
-              <p>{{ records.nivelesRedAlerts }}</p>
-            </div>
-          </div>
-        </div>
-        <img src="/assets/images/sensors/nivel.svg" alt="" />
+<div class="content">
+  <app-side-menu></app-side-menu>
+  <div class="mainContent">
+    <div class="top">
+      <div class="title"><h1>Monitoreo Global</h1></div>
+      <div class="menu">
+        <!--<a href=""><img src="/assets/images/top/ajustes.svg" alt="" /></a>
+        <a href=""
+          ><img src="/assets/images/top/notificaciones.svg" alt=""
+        /></a>-->
+        <button class="btn btn-outline-dark" (click)="openProfilePage()">
+          {{ username }}
+        </button>
       </div>
     </div>
-    <div class="row">
+    <div class="items">
       <div class="sensorCard">
-        <div style="display: flex; flex-direction: column">
-          <p>Energia</p>
-          <div class="sensorAlerts">
-            <div class="sensorItem">
-              <img src="/assets/images/items/ok.svg" alt="" />
-              <p>{{ records.energiaSafes }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/warning.svg" alt="" />
-              <p>{{ records.energiaWarnings }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/danger.svg" alt="" />
-              <p>{{ records.energiaRedAlerts }}</p>
-            </div>
-          </div>
+        <div class="lecturas">
+          <h6>Lecturas OK</h6>
+          <p>{{ records.totalSafes }}</p>
         </div>
-        <img src="/assets/images/sensors/energia.svg" alt="" />
+        <img src="/assets/images/items/ok.svg" alt="" />
       </div>
       <div class="sensorCard">
-        <div style="display: flex; flex-direction: column">
-          <p>Tension</p>
-          <div class="sensorAlerts">
-            <div class="sensorItem">
-              <img src="/assets/images/items/ok.svg" alt="" />
-              <p>{{ records.tensionSafes }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/warning.svg" alt="" />
-              <p>{{ records.tensionWarnings }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/danger.svg" alt="" />
-              <p>{{ records.tensionRedAlerts }}</p>
-            </div>
-          </div>
+        <div class="lecturas">
+          <h6>Alertas medias</h6>
+          <p>{{ records.totalWarnings }}</p>
         </div>
-        <img src="/assets/images/sensors/tension.svg" alt="" />
+        <img src="/assets/images/items/warning.svg" alt="" />
       </div>
       <div class="sensorCard">
-        <div style="display: flex; flex-direction: column">
-          <p>Monoxido de carbono</p>
-          <div class="sensorAlerts">
-            <div class="sensorItem">
-              <img src="/assets/images/items/ok.svg" alt="" />
-              <p>{{ records.monoxidoSafes }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/warning.svg" alt="" />
-              <p>{{ records.monoxidoWarnings }}</p>
-            </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/danger.svg" alt="" />
-              <p>{{ records.monoxidoRedAlerts }}</p>
-            </div>
-          </div>
+        <div class="lecturas">
+          <h6>Alertas rojas</h6>
+          <p>{{ records.totalRedAlerts }}</p>
         </div>
-        <img src="/assets/images/sensors/monoxido.svg" alt="" />
+        <img src="/assets/images/items/danger.svg" alt="" />
       </div>
       <div class="sensorCard">
-        <div style="display: flex; flex-direction: column">
-          <p>Otros gases</p>
-          <div class="sensorAlerts">
-            <div class="sensorItem">
-              <img src="/assets/images/items/ok.svg" alt="" />
-              <p>{{ records.gasesSafes }}</p>
+        <div class="lecturas">
+          <h6>Sensores deshabilitados</h6>
+          <p>{{ records.totalNotActive }}</p>
+        </div>
+        <img src="/assets/images/items/deshabilitado.svg" alt="" />
+      </div>
+    </div>
+    <div class="tabla" style="overflow: scroll">
+      <div class="tituloTabla">
+        <h6>Plantas</h6>
+        <button *ngIf="isAdmin" class="btn" (click)="openPlantCreator()">
+          + Crear nueva planta
+        </button>
+        <button class="btn" (click)="getReadings()">
+          + Obtener nuevas mediciones
+        </button>
+      </div>
+      <div class="contenidoTabla">
+        <div class="columNames">
+          <div><h6>Pais</h6></div>
+          <div><h6>Nombre de la planta</h6></div>
+          <div><h6>Lecturas</h6></div>
+          <div><h6>Alertas medias</h6></div>
+          <div><h6>Alertas rojas</h6></div>
+          <div><h6>Acciones</h6></div>
+        </div>
+        <ul *ngFor="let plant of plants">
+          <div class="columNames row">
+            <div class="col">
+              <p>{{ plant.country }}</p>
             </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/warning.svg" alt="" />
-              <p>{{ records.gasesWarnings }}</p>
+            <div class="col">
+              <p>{{ plant.name }}</p>
             </div>
-            <div class="sensorItem">
-              <img src="/assets/images/items/danger.svg" alt="" />
-              <p>{{ records.gasesRedAlerts }}</p>
+            <div class="col number">
+              <p>{{ plant.totalSafes }}</p>
+            </div>
+            <div class="col number">
+              <p>{{ plant.totalWarnings }}</p>
+            </div>
+            <div class="col number">
+              <p>{{ plant.totalRedAlerts }}</p>
+            </div>
+            <div class="col number">
+              <button
+                *ngIf="isAdmin"
+                class="btn"
+                (click)="openSensorCreator(plant)"
+              >
+                <img
+                  src="/assets/images/more.svg"
+                  alt=""
+                  style="vertical-align: top"
+                />
+              </button>
             </div>
           </div>
+          <span class="divisor"></span>
+        </ul>
+      </div>
+    </div>
+    <div class="indicadores">
+      <div class="row first">
+        <div class="sensorCard">
+          <div style="display: flex; flex-direction: column">
+            <p>Temperatura</p>
+            <div class="sensorAlerts">
+              <div class="sensorItem">
+                <img src="/assets/images/items/ok.svg" alt="" />
+                <p>{{ records.temperatureSafes }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/warning.svg" alt="" />
+                <p>{{ records.temperatureWarnings }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/danger.svg" alt="" />
+                <p>{{ records.temperatureRedAlerts }}</p>
+              </div>
+            </div>
+          </div>
+          <img src="/assets/images/sensors/temperatura.svg" />
         </div>
-        <img src="/assets/images/sensors/gases.svg" alt="" />
+        <div class="sensorCard">
+          <div style="display: flex; flex-direction: column">
+            <p>Presion</p>
+            <div class="sensorAlerts">
+              <div class="sensorItem">
+                <img src="/assets/images/items/ok.svg" alt="" />
+                <p>{{ records.presionSafes }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/warning.svg" alt="" />
+                <p>{{ records.presionWarnings }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/danger.svg" alt="" />
+                <p>{{ records.presionRedAlerts }}</p>
+              </div>
+            </div>
+          </div>
+          <img src="/assets/images/sensors/presion.svg" alt="" />
+        </div>
+        <div class="sensorCard">
+          <div style="display: flex; flex-direction: column">
+            <p>Vientos</p>
+            <div class="sensorAlerts">
+              <div class="sensorItem">
+                <img src="/assets/images/items/ok.svg" alt="" />
+                <p>{{ records.vientoSafes }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/warning.svg" alt="" />
+                <p>{{ records.vientoWarnings }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/danger.svg" alt="" />
+                <p>{{ records.vientoRedAlerts }}</p>
+              </div>
+            </div>
+          </div>
+          <img src="/assets/images/sensors/viento.svg" alt="" />
+        </div>
+        <div class="sensorCard">
+          <div style="display: flex; flex-direction: column">
+            <p>Niveles</p>
+            <div class="sensorAlerts">
+              <div class="sensorItem">
+                <img src="/assets/images/items/ok.svg" alt="" />
+                <p>{{ records.nivelesSafes }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/warning.svg" alt="" />
+                <p>{{ records.nivelesWarnings }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/danger.svg" alt="" />
+                <p>{{ records.nivelesRedAlerts }}</p>
+              </div>
+            </div>
+          </div>
+          <img src="/assets/images/sensors/nivel.svg" alt="" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="sensorCard">
+          <div style="display: flex; flex-direction: column">
+            <p>Energia</p>
+            <div class="sensorAlerts">
+              <div class="sensorItem">
+                <img src="/assets/images/items/ok.svg" alt="" />
+                <p>{{ records.energiaSafes }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/warning.svg" alt="" />
+                <p>{{ records.energiaWarnings }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/danger.svg" alt="" />
+                <p>{{ records.energiaRedAlerts }}</p>
+              </div>
+            </div>
+          </div>
+          <img src="/assets/images/sensors/energia.svg" alt="" />
+        </div>
+        <div class="sensorCard">
+          <div style="display: flex; flex-direction: column">
+            <p>Tension</p>
+            <div class="sensorAlerts">
+              <div class="sensorItem">
+                <img src="/assets/images/items/ok.svg" alt="" />
+                <p>{{ records.tensionSafes }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/warning.svg" alt="" />
+                <p>{{ records.tensionWarnings }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/danger.svg" alt="" />
+                <p>{{ records.tensionRedAlerts }}</p>
+              </div>
+            </div>
+          </div>
+          <img src="/assets/images/sensors/tension.svg" alt="" />
+        </div>
+        <div class="sensorCard">
+          <div style="display: flex; flex-direction: column">
+            <p>Monoxido de carbono</p>
+            <div class="sensorAlerts">
+              <div class="sensorItem">
+                <img src="/assets/images/items/ok.svg" alt="" />
+                <p>{{ records.monoxidoSafes }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/warning.svg" alt="" />
+                <p>{{ records.monoxidoWarnings }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/danger.svg" alt="" />
+                <p>{{ records.monoxidoRedAlerts }}</p>
+              </div>
+            </div>
+          </div>
+          <img src="/assets/images/sensors/monoxido.svg" alt="" />
+        </div>
+        <div class="sensorCard">
+          <div style="display: flex; flex-direction: column">
+            <p>Otros gases</p>
+            <div class="sensorAlerts">
+              <div class="sensorItem">
+                <img src="/assets/images/items/ok.svg" alt="" />
+                <p>{{ records.gasesSafes }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/warning.svg" alt="" />
+                <p>{{ records.gasesWarnings }}</p>
+              </div>
+              <div class="sensorItem">
+                <img src="/assets/images/items/danger.svg" alt="" />
+                <p>{{ records.gasesRedAlerts }}</p>
+              </div>
+            </div>
+          </div>
+          <img src="/assets/images/sensors/gases.svg" alt="" />
+        </div>
       </div>
     </div>
   </div>
@@ -310,14 +320,14 @@
               class="form-control"
               type="name"
               [value]="plantName"
-              disabled
+              readonly
             />
             <p>Pais</p>
             <input
               class="form-control"
               type="name"
               [value]="country"
-              disabled
+              readonly
             />
           </div>
           <div class="newSe nsorDiv">
@@ -350,6 +360,58 @@
         </form>
       </div>
       <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
+<div class="modal profile" tabindex="-1" role="form" *ngIf="profilePage">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <app-profile-page></app-profile-page>
+      <div class="row" style="justify-content: center">
+        <button class="col-5 btn btn-outline-dark" (click)="openChangePassword()" >Change Password</button>
+        <button class="col-5 btn btn-outline-dark" (click)="closeProfilePage()" >Close</button>
+        <div class="modal-body" id="passwordModal" *ngIf="passwordChange">
+          <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+            <div class="passwordModalElements">
+              <p class="passwordTitles">Username</p>
+              <input
+                class="form-control"
+                type="name"
+                formControlName="username"
+                ngModel="{{username}}"
+                readonly
+              />
+              <p class="passwordTitles">Old Password</p>
+              <input
+                class="form-control"
+                type="name"
+                formControlName="oldPassword"
+              />
+              <p class="passwordTitles">New Password</p>
+              <input
+                class="form-control"
+                type="name"
+                formControlName="newPassword"
+              />
+            </div>
+            <div
+              id="response_area"
+              style="height: fit-content; width: 100%"
+            ></div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="cancelChangePassword()">
+                Cancel
+              </button>
+              <input
+                type="submit"
+                value="changePassword"
+                method="post"
+                class="btn btn-outline-dark"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

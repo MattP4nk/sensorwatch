@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { LocalStorageService } from './local-storage.service';
 import { CommsDto } from '../Dtos/Dtos';
 import { CommunicationsService } from './communications.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class LoginGuardService implements CanActivate {
@@ -28,7 +28,7 @@ export class LoginGuardService implements CanActivate {
         this.keyIsValid = true;
       }
       // Primer escenario - Estoy en Login pero con un key VALIDO = Vamos a dashboard.
-      if (this.keyIsValid) {
+      if (this.keyIsValid && (state.url == "login")) {
         this.router.navigateByUrl("dashboard");
       }
       // Segundo escenario - No estoy en login con un key NO VALIDO = vamos a login.

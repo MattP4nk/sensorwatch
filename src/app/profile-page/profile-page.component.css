@@ -1,0 +1,86 @@
+.profile {
+    position: relative;
+    margin-bottom: 50px;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    z-index: 1;
+    border-radius: 15px;
+    -webkit-box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
+    box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
+}
+.profile .thumb {
+    position: relative;
+    z-index: 1;
+    border-radius: 15px 15px 0 0;
+    margin: 0 auto;
+    padding: 30px 30px 0 30px;
+    background-color: #626262;
+    overflow: hidden;
+}
+.profile .thumb::after {
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    position: absolute;
+    width: 150%;
+    height: 80px;
+    bottom: -45px;
+    left: -25%;
+    content: "";
+    background-color: #ffffff;
+    -webkit-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+}
+
+.profile .detailsInfo {
+    position: relative;
+    z-index: 1;
+    padding: 30px;
+    text-align: right;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    border-radius: 0 0 15px 15px;
+    background-color: #ffffff;
+}
+.profile .detailsInfo::after {
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    position: absolute;
+    z-index: 1;
+    width: 50px;
+    height: 3px;
+    background-color: #616161;
+    content: "";
+    top: 12px;
+    right: 30px;
+}
+.profile .detailsInfo h6 {
+    margin-bottom: 0.25rem;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+.profile .detailsInfo p {
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+.profile:hover .thumb::after,
+.profile:focus .thumb::after {
+    background-color: #070a57;
+}
+.profile:hover .detailsInfo,
+.profile:focus .detailsInfo {
+    background-color: #070a57;
+}
+.profile:hover .detailsInfo::after,
+.profile:focus .detailsInfo::after {
+    background-color: #ffffff;
+}
+.profile:hover .detailsInfo h6,
+.profile:focus .detailsInfo h6 {
+    color: #ffffff;
+}
+.profile:hover .detailsInfo p,
+.profile:focus .detailsInfo p {
+    color: #ffffff;
+}

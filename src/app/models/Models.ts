@@ -54,4 +54,54 @@ export class Records{
     totalWarnings: number = 0;
     totalRedAlerts: number = 0;
     totalNotActive: number = 0;
+
+    updateRecords(historic: { type: any; safe: number; warning: number; redAlert: number; Safe: number; disabled: number; }){
+        switch (historic.type) {
+            case "temperature":
+              this.temperatureSafes = historic.safe;
+              this.temperatureWarnings = historic.warning;
+              this.temperatureRedAlerts = historic.redAlert;
+              break;
+            case "presion":
+              this.presionSafes = historic.safe;
+              this.presionWarnings = historic.warning;
+              this.presionRedAlerts = historic.redAlert;
+              break;
+            case "viento":
+              this.vientoSafes = historic.safe;
+              this.vientoWarnings = historic.warning;
+              this.vientoRedAlerts = historic.redAlert;
+              break;
+            case "niveles":
+              this.nivelesSafes = historic.safe;
+              this.nivelesWarnings = historic.warning;
+              this.nivelesRedAlerts = historic.redAlert;
+              break;
+            case "energia":
+              this.energiaSafes = historic.safe;
+              this.energiaWarnings = historic.warning;
+              this.energiaRedAlerts = historic.redAlert;
+              break;
+            case "tension":
+              this.tensionSafes = historic.safe;
+              this.tensionWarnings = historic.warning;
+              this.tensionRedAlerts = historic.redAlert;
+              break;
+            case "monoxido":
+              this.monoxidoSafes = historic.safe;
+              this.monoxidoWarnings = historic.warning;
+              this.monoxidoRedAlerts = historic.redAlert;
+              break;
+            case "gas":
+              this.gasesSafes = historic.safe;
+              this.gasesWarnings = historic.warning;
+              this.gasesRedAlerts = historic.redAlert;
+              break;
+            case "totals":
+              this.totalSafes = historic.safe;
+              this.totalWarnings = historic.warning;
+              this.totalRedAlerts = historic.redAlert;
+              this.totalNotActive = historic.disabled;
+          }
+    }
 }

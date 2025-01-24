@@ -10,6 +10,7 @@ import { LocalStorageService } from '../services/local-storage.service';
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
+  providers: [CommunicationsService, LocalStorageService],
   templateUrl: './login-screen.component.html',
   styleUrl: './login-screen.component.css',
 })

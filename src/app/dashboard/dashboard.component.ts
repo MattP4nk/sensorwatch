@@ -5,13 +5,15 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommsDto } from '../Dtos/Dtos';
 import { PlantModel, Records } from '../models/Models';
+import { ProfilePageComponent } from '../profile-page/profile-page.component';
 import { CommunicationsService } from '../services/communications.service';
 import { LocalStorageService } from '../services/local-storage.service';
+import { SideMenuComponent } from '../side-menu/side-menu.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, ReactiveFormsModule],
+  imports: [HttpClientModule, CommonModule, ReactiveFormsModule, SideMenuComponent, ProfilePageComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -19,6 +21,7 @@ export class DashboardComponent {
 
   plantForm: FormGroup;
   sensorForm: FormGroup;
+  passwordForm: FormGroup;
   constructor(
     private commService: CommunicationsService,
     private Storage: LocalStorageService,
@@ -31,6 +34,12 @@ export class DashboardComponent {
       type: new FormControl(),
       plant_id: new FormControl()
     });
+    this.passwordForm = new FormGroup({
+      username: new FormControl(),
+      oldPassword: new FormControl(),
+      newPassword: new FormControl()
+    });
+    
   }
 
   plants: Array<PlantModel> = [];
@@ -47,6 +56,8 @@ export class DashboardComponent {
   plantId!: number;
   creatingPlant: boolean = false;
   creatingSensor: boolean = false;
+  profilePage: boolean = false;
+  passwordChange: boolean = false;
   display: string = "block"
 
   plantsRequest: CommsDto = {
@@ -70,6 +81,10 @@ export class DashboardComponent {
     command: "updateAllValues",
     target: "all"
   }
+  changeRequest: CommsDto = {
+    area: 'users',
+    command: 'passwordChange'
+  };
 
   async ngOnInit() {
     this.getPlants(this.plantsRequest);
@@ -88,6 +103,14 @@ export class DashboardComponent {
     });
   }
 
+  openProfilePage() { 
+    this.profilePage = true;
+  }
+
+  closeProfilePage() { 
+    this.profilePage = false;
+  }
+
   openPlantCreator() {
     this.creatingPlant = true;
   }
@@ -103,6 +126,30 @@ export class DashboardComponent {
   }
   closeSensorCreator() {
     this.creatingSensor = false;
+  }
+
+  async changePassword(){
+    console.log(this.passwordForm.value)
+    this.changeRequest.newCredentials = this.passwordForm.value
+    await this.commService.commsManager(this.changeRequest).subscribe((data) => {
+      let output: HTMLParagraphElement = document.createElement('p');
+      output.setAttribute(
+        'style',
+        'background: #FFF; color:	darkseagreen; width: 95%; margin-bot: 10px; border-style: solid; border-radius: 1rem; padding: 5px;'
+      );
+      var content = document.createTextNode('');
+      output.appendChild(content);
+      content.nodeValue = data.status;
+      document.getElementById("response_area")!.appendChild(output)
+    })
+  }
+
+  openChangePassword(){
+    this.passwordChange = true
+  }
+
+  cancelChangePassword(){
+    this.passwordChange = false;
   }
 
   async createSensor() {
@@ -157,53 +204,7 @@ export class DashboardComponent {
   async getHistorics(request: CommsDto) {
     await this.commService.commsManager(request).subscribe((data) => {
       for (let historic of data.pack) {
-        switch (historic.type) {
-          case "temperature":
-            this.records.temperatureSafes = historic.safe;
-            this.records.temperatureWarnings = historic.warning;
-            this.records.temperatureRedAlerts = historic.redAlert;
-            break;
-          case "presion":
-            this.records.presionSafes = historic.Safe;
-            this.records.presionWarnings = historic.warning;
-            this.records.presionRedAlerts = historic.redAlert;
-            break;
-          case "viento":
-            this.records.vientoSafes = historic.Safe;
-            this.records.vientoWarnings = historic.warning;
-            this.records.vientoRedAlerts = historic.redAlert;
-            break;
-          case "niveles":
-            this.records.nivelesSafes = historic.Safe;
-            this.records.nivelesWarnings = historic.warning;
-            this.records.nivelesRedAlerts = historic.redAlert;
-            break;
-          case "energia":
-            this.records.energiaSafes = historic.Safe;
-            this.records.energiaWarnings = historic.warning;
-            this.records.energiaRedAlerts = historic.redAlert;
-            break;
-          case "tension":
-            this.records.tensionSafes = historic.Safe;
-            this.records.tensionWarnings = historic.warning;
-            this.records.tensionRedAlerts = historic.redAlert;
-            break;
-          case "monoxido":
-            this.records.monoxidoSafes = historic.Safe;
-            this.records.monoxidoWarnings = historic.warning;
-            this.records.monoxidoRedAlerts = historic.redAlert;
-            break;
-          case "gas":
-            this.records.gasesSafes = historic.Safe;
-            this.records.gasesWarnings = historic.warning;
-            this.records.gasesRedAlerts = historic.redAlert;
-            break;
-          case "totals":
-            this.records.totalSafes = historic.safe;
-            this.records.totalWarnings = historic.warning;
-            this.records.totalRedAlerts = historic.redAlert;
-            this.records.totalNotActive = historic.disabled;
-        }
+        this.records.updateRecords(historic);
       }
     });
   }

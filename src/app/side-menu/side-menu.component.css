@@ -1,5 +1,7 @@
 .sideMenu{
-    width: 5vw;
+    width: 4vw;
+    margin: 0px;
+    padding: 0px;
     height: 100vh;
     background-color: #131212;
     display: flex;

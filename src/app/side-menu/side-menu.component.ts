@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { LocalStorageService } from '../services/local-storage.service';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -14,16 +13,8 @@ export class SideMenuComponent {
   constructor(
     private storage: LocalStorageService
   ) {}
-  visible: boolean = false;
 
   ngOnInit(): void {
-    this.isVisible();
-  }
-
-  isVisible() {
-    if (this.storage.get("key") != null){
-      this.visible = true;
-    }
   }
 
   logOff() {
